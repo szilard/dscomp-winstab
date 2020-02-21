@@ -49,5 +49,10 @@ simulating repeated "competitions" on finite "private leaderboard" test sets of 
 We rank the models (based on AUC) on the large "population" evaluation set ("true rank") and
 also on each of the `B` "competitions" (on the "private leaderboards" test sets).
 
+### Results
+
+Test set size `M=100K`, number of models ("competitors") `K=100`
+
+![](rank-100K-M100.png)
 
 
