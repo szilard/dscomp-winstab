@@ -63,3 +63,8 @@ also on each of the `B` "competitions" (on the "private leaderboards" test sets)
 ![](rank-100K-M1000.png)
 
 
+"Private LB" test set size `M=10K`, number of "competitors" `K=100`
+
+![](rank-10K-M100.png)
+
+
