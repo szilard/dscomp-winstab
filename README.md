@@ -14,7 +14,7 @@ accuracy metric) and not large enough evaluation datasets, the "winner" will be 
 the top models). 
 
 The simulation captures an idealized setting. A training set (along with a separate "validation" set
-used for early stopping) will be randomly drawn from a larger dataset  
+used for early stopping) will be randomly drawn from a larger dataset.
 A large "population" evaluation set will be drawn from the same data, and then we'll draw repeatedly
 smaller subsamples from the latter to be used as "evaluation" set/"private leaderboard". 
 We'll train several models on the training set and we'll compare their "true" performance and rank
