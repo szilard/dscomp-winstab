@@ -4,8 +4,7 @@
 Many data science competitions (e.g. Kaggles) are won with small, 4th digit (0.0001s) margins
 in the respective metric over the 2nd place. If the dataset used for evaluation ("private 
 leaderboard") is not large enough, the top ranks might not reflect true underlying value
-(the ranks will not be statistically significant, i.e. a new/another evaluation set with the 
-same characteristics could produce another "winner"). 
+(the ranks will not be statistically significant, i.e. a new/another evaluation could produce another "winner"). 
 
 In this repo we'll study the rank overlapping problem of the top models in a data science competition 
 *simulation* as a function of the evaluation/test set size and the number of competitors. It is
