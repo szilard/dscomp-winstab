@@ -1,25 +1,25 @@
 
 ## Winner stability in data science competitions
 
-Many data science competitions (e.g. Kaggles) are won with small, 4th digit (0.0001s) margins
+Many data science competitions (e.g. Kaggles) are usually won with small, 4th digit (0.0001s) margins
 in the respective metric over the 2nd place. If the dataset used for evaluation ("private 
 leaderboard") is not large enough, the top ranks might not reflect true underlying value
-(the ranks will not be statistically significant, i.e. a new/another evaluation dataset 
-with same characteristics could produce another "winner"). 
+(the ranks will have some statistical variation, i.e. a new evaluation dataset 
+with the same characteristics could produce another "winner"). 
 
-In this repo we'll study the rank overlapping problem of the top models in a data science competition 
-*simulation* as a function of the evaluation/test set size and the number of competitors. It is
+In this repo we'll study the rank stability problem of the top models in a *simulation* of a data science competition 
+as a function of the evaluation/test set size and the number of competitors. It is
 to be expected that for a large number of competitors (lots of models within a small range of the
 accuracy metric) and not large enough evaluation datasets, the "winner" will be to some extent random (among
 the top models). 
 
-This simulation captures an idealized setting. A training set (along with a separate "validation" set
+This simple simulation captures an idealized setting. A training set (along with a separate "validation" set
 used for early stopping) will be randomly drawn from a larger dataset.
 A large "population" evaluation set will be drawn from the same data, and then we'll draw repeatedly
-smaller (sub)samples from the latter to be used as "evaluation" set/"private leaderboard". 
+smaller (sub)samples from the latter to be used as "competition evaluation" set/"private leaderboard". 
 We'll train several models on the training set and we'll compare their "true" performance and rank
 (as measured on the larger "population" evaluation set) with the "competition" performance and rank
-as measured on the smaller "private leaderboard" in each (re)sample. For a competition to be meaningful, the rank
+as measured on the smaller "private leaderboard" in each (re)sample. For a data science competition to be meaningful, the rank
 of the top models in each "private leaderboard" resample should coincide with their rank on the
 larger "population" evaluation set. 
 
@@ -34,7 +34,7 @@ procedure could even be used as a "fair" way to distribute the prize money betwe
 We have to note that this simple simulation only captures the effect of having a finite evaluation sample in presence of 
 many competitors. In real-world projects, distributions (slowly) change in time and for example the
 training and test sets have slightly different distribution. Also once models are deployed in production,
-the data distributions change even further and it is not necessarily the best model on the evaluation test set
+the data distributions change (slowly) even further and it is not necessarily the best model on the evaluation test set
 that is going to perform the best on the new online data. (For example it is a conjecture of this author that less
 complex models will be more robust to non-stationarity and will perform better in practice than highly
 tuned models that "win" a "competition" on a fixed test set).
