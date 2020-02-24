@@ -34,7 +34,7 @@ procedure could even be used as a "fair" way to distribute the prize money betwe
 We have to note that this simple simulation only captures the effect of having a finite evaluation sample in presence of 
 many competitors. In real-world projects, distributions (slowly) change in time and for example the
 training and test sets have slightly different distribution. Also once models are deployed in production,
-the data distributions change (slowly) even further and it is not necessarily the best model on the evaluation test set
+the data distributions change even further and it is not necessarily the best model on the evaluation test set
 that is going to perform the best on the new online data. (For example it is a conjecture of this author that less
 complex models will be more robust to non-stationarity and will perform better in practice than highly
 tuned models that "win" a "competition" on a fixed test set).
