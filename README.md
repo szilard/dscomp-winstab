@@ -77,6 +77,9 @@ on the "private LB" evaluation
 
 ![](rank-100K-100mod.png)
 
+![](rankhist-100K-100mod.png)
+
+
 It is clear that in this case the top 3 ranks remain pretty stable (the top 3 models
 rarely switch ranks as it can be seen on all the above plots). As we go down in the ranks, the rank
 stability decreases, e.g. the 90% confidence interval for the "competition rank" of the 10th model is
