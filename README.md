@@ -92,5 +92,20 @@ When the number of competitors increases, the top ranks become more unstable:
 
 
 
+### "Private LB" test set size `N=10,000`
 
+For smaller evaluation sets (sadly actually pretty common in Kaggle competitions), the noise increases and the ranks are
+(even) more unstable. 
+
+#### Number of models ("competitors") `M=100`
+
+![](rank-10K-100mod.png)
+
+#### Number of models ("competitors") `M=3000`
+
+![](rank-10K-3000mod.png)
+
+Running such a competition is silly. The median "competition rank" for the actually best model is 12, that is there is
+50% chance that the best model will be 12th or worse in the competition. There is even a 10% chance that the best model will be ranked
+50th or worse. 
 
