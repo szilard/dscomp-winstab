@@ -5,7 +5,7 @@ Many data science competitions (e.g. Kaggles) are usually won with small, 4th di
 in the respective metric over the 2nd place. If the dataset used for evaluation ("private 
 leaderboard") is not large enough, the top ranks might not reflect true underlying value
 (the ranks will have considerable statistical variation, i.e. a new evaluation dataset 
-with the same characteristics could produce another "winner"). 
+with the same characteristics could produce a totally different "winner"). 
 
 In this repo we'll study the rank stability problem of the top models in a *simulation* of a data science competition 
 as a function of the evaluation/test set size and the number of competitors. It is
@@ -42,19 +42,19 @@ tuned models that "win" a "competition" on a fixed test set).
 
 ### Simulation setup
 
-From a dataset of 10 million records, we get a training sample of `N=100,000` and a validation set of `V=20,000` records. 
-We train `K` (e.g. `K=1000`) GBM models (binary classification) with lightgbm by using random search over a grid of hyperparameter values
+From a dataset of 10 million records, we get a training sample of 100,000 and a validation set of 20,000 records. 
+We train `M` (e.g. `M=1000`) GBM models (binary classification) with lightgbm by using random search over a grid of hyperparameter values
 and early stopping on the validation set.
-We measure the AUC of the models on a larger "population" evaluation set and on `B=50` samples of size `M` (e.g. `M=100,000`) 
-simulating repeated "competitions" on finite "private leaderboard" test sets of size `M`. 
+We measure the AUC of the models on a larger "population" evaluation set and on `C=50` samples of size `N` (e.g. `N=100,000`) 
+simulating repeated "competitions" on finite "private leaderboard" test sets of size `N`. 
 We rank the models (based on AUC) on the large "population" evaluation set ("true rank") and
-also on each of the `B` "competitions" (on the "private leaderboards" test sets).
+also on each of the `C` "competitions" (on the "private leaderboards" test sets).
 
 
 ### Results
 
 
-**"Private LB" test set size `M=100,000`, number of models ("competitors") `K=100`**
+**"Private LB" test set size `N=100,000`, number of models ("competitors") `M=100`**
 
 "True AUC" (as measured on the larger "population" evaluation set) vs "competition AUC" (as measured
 on the "private LB" evaluation set on 4 resamples ("competitions"):
@@ -84,7 +84,7 @@ stability decreases, e.g. the 90% confidence interval for the "competition rank"
 
 
 
-**"Private LB" test set size `M=100,000`, number of models ("competitors") `K=1000`**
+**"Private LB" test set size `N=100,000`, number of models ("competitors") `M=1000`**
 
 When the number of competitors increases, the top ranks become more unstable:
 
