@@ -90,6 +90,8 @@ stability decreases, e.g. the 90% confidence interval for the "competition rank"
 
 When the number of competitors increases, the top ranks become more unstable:
 
+...
+
 
 
 ### "Private LB" test set size `N=10,000`
@@ -97,11 +99,11 @@ When the number of competitors increases, the top ranks become more unstable:
 For smaller evaluation sets (sadly actually pretty common in Kaggle competitions), the noise increases and the ranks are
 (even) more unstable. 
 
-#### Number of models ("competitors") `M=100`
+#### Number of models `M=100`
 
 ![](rank-10K-100mod.png)
 
-#### Number of models ("competitors") `M=3000`
+#### Number of models `M=3000`
 
 ![](rank-10K-3000mod.png)
 
