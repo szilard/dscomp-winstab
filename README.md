@@ -54,7 +54,7 @@ also on each of the `B` "competitions" (on the "private leaderboards" test sets)
 ### Results
 
 
-*"Private LB" test set size `M=100,000`, number of models ("competitors") `K=100`*
+**"Private LB" test set size `M=100,000`, number of models ("competitors") `K=100`**
 
 "True AUC" (as measured on the larger "population" evaluation set) vs "competition AUC" (as measured
 on the "private LB" evaluation set on 4 resamples ("competitions"):
