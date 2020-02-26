@@ -54,7 +54,9 @@ also on each of the `C` "competitions" (on the "private leaderboards" test sets)
 ### Results
 
 
-**"Private LB" test set size `N=100,000`, number of models ("competitors") `M=100`**
+#### "Private LB" test set size `N=100,000`
+
+**Number of models ("competitors") `M=100`**
 
 "True AUC" (as measured on the larger "population" evaluation set) vs "competition AUC" (as measured
 on the "private LB" evaluation set on 4 resamples ("competitions"):
@@ -84,7 +86,11 @@ stability decreases, e.g. the 90% confidence interval for the "competition rank"
 
 
 
-**"Private LB" test set size `N=100,000`, number of models ("competitors") `M=1000`**
+**Number of models ("competitors") `M=1000`**
 
 When the number of competitors increases, the top ranks become more unstable:
+
+
+
+
 
