@@ -90,7 +90,13 @@ stability decreases, e.g. the 90% confidence interval for the "competition rank"
 
 When the number of competitors increases, the top ranks become more unstable:
 
-...
+RESULTS NEEDED
+
+#### Number of models `M=3000`
+
+It is very common in Kaggle competitions to have ~3000 participants. In this case: 
+
+RESULTS NEEDED
 
 
 
