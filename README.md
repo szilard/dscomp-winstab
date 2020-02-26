@@ -75,5 +75,16 @@ on the "private LB" evaluation
 
 ![](rank-100K-100mod.png)
 
+It is clear that in this case the top 3 ranks remain pretty stable (the top 3 models
+rarely switch ranks as it can be seen on all the above plots). As we go down in the ranks, the rank
+stability decreases, e.g. the 90% confidence interval for the "competition rank" of the 10th model is
+[6,16], for the 30th model is [21,46]
 
+![](rankscatter-100K-100mod.png)
+
+
+
+**"Private LB" test set size `M=100,000`, number of models ("competitors") `K=1000`**
+
+When the number of competitors increases, the top ranks become more unstable:
 
