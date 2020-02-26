@@ -1,5 +1,5 @@
 
-## Winner stability in data science competitions
+# Winner stability in data science competitions
 
 Many data science competitions (e.g. Kaggles) are usually won with small, 4th digit (0.0001s) margins
 in the respective metric over the 2nd place. If the dataset used for evaluation ("private 
@@ -40,7 +40,7 @@ complex models will be more robust to non-stationarity and will perform better i
 tuned models that "win" a "competition" on a fixed test set).
 
 
-### Simulation setup
+## Simulation setup
 
 From a dataset of 10 million records, we get a training sample of 100,000 and a validation set of 20,000 records. 
 We train `M` (e.g. `M=1000`) GBM models (binary classification) with lightgbm by using random search over a grid of hyperparameter values
@@ -51,12 +51,12 @@ We rank the models (based on AUC) on the large "population" evaluation set ("tru
 also on each of the `C` "competitions" (on the "private leaderboards" test sets).
 
 
-### Results
+## Results
 
 
-#### "Private LB" test set size `N=100,000`
+### "Private LB" test set size `N=100,000`
 
-**Number of models ("competitors") `M=100`**
+#### Number of models ("competitors") `M=100`
 
 "True AUC" (as measured on the larger "population" evaluation set) vs "competition AUC" (as measured
 on the "private LB" evaluation set on 4 resamples ("competitions"):
@@ -86,7 +86,7 @@ stability decreases, e.g. the 90% confidence interval for the "competition rank"
 
 
 
-**Number of models ("competitors") `M=1000`**
+#### Number of models ("competitors") `M=1000`
 
 When the number of competitors increases, the top ranks become more unstable:
 
