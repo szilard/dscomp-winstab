@@ -93,7 +93,12 @@ stability decreases, e.g. the 90% confidence interval for the "competition rank"
 
 When the number of competitors increases, the top ranks become more unstable:
 
-RESULTS NEEDED
+![](rank-100K-1000mod.png)
+
+![](rankhist-100K-1000mod.png)
+
+![](rankhistcum-100K-1000mod.png)
+
 
 #### Number of models `M=3000`
 
