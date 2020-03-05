@@ -151,9 +151,9 @@ Running such a competition is silly. The median "competition rank" for the actua
 50th or worse. 
 
 
-## How often best is winning
+## How often the best model is winning
 
-Frequency best model is winning as a function of test set size (N) and number of models/competitors (M):
+The frequency the best model/competitor is winning as a function of test set size (N) and number of models/competitors (M):
 
 ![](figs-etc/best-winning.png)
 
