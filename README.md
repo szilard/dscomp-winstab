@@ -79,7 +79,6 @@ on the "private LB" evaluation
 
 ![](rankhist-100K-100mod.png)
 
-
 It is clear that in this case the top 3 ranks remain pretty stable (the top 3 models
 rarely switch ranks as it can be seen on all the above plots). As we go down in the ranks, the rank
 stability decreases, e.g. the 90% confidence interval for the "competition rank" of the 10th model is
@@ -100,11 +99,22 @@ When the number of competitors increases, the top ranks become more unstable:
 ![](rankhistcum-100K-1000mod.png)
 
 
+
 #### Number of models `M=3000`
 
 It is very common in Kaggle competitions to have ~3000 participants. In this case: 
 
-RESULTS NEEDED
+![](scatter-100K-3000mod.png)
+
+![](path-100K-3000mod.png)
+
+![](pathzoom-100K-3000mod.png)
+
+![](rank-100K-3000mod.png)
+
+![](rankhist-100K-3000mod.png)
+
+![](rankscatter-100K-3000mod.png)
 
 
 
