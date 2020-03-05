@@ -136,9 +136,15 @@ For smaller evaluation sets (sadly actually pretty common in Kaggle competitions
 
 #### Number of models `M=3000`
 
+![](scatter-10K-3000mod.png)
+
+![](pathzoom-10K-3000mod.png)
+
 ![](rank-10K-3000mod.png)
 
 ![](rankhistcum-10K-3000mod.png)
+
+![](rankscatter-10K-3000mod.png)
 
 Running such a competition is silly. The median "competition rank" for the actually best model is 12, that is there is
 50% chance that the best model will be 12th or worse in the competition. There is even a 10% chance that the best model will be ranked
