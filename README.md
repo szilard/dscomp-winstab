@@ -150,3 +150,11 @@ Running such a competition is silly. The median "competition rank" for the actua
 50% chance that the best model will be 12th or worse in the competition. There is even a 10% chance that the best model will be ranked
 50th or worse. 
 
+
+## How often best is winning
+
+Frequency best model is winning as a function of test set size (N) and number of models/competitors (M):
+
+![](figs-etc/best-winning.png)
+
+
