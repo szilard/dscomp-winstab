@@ -61,30 +61,30 @@ also on each of the `C` "competitions" (on the "private leaderboards" test sets)
 "True AUC" (as measured on the larger "population" evaluation set) vs "competition AUC" (as measured
 on the "private LB" evaluation set on 4 resamples ("competitions"):
 
-![](scatter-100K-100mod.png)
+![](figs-100K-100mod/scatter-100K-100mod.png)
 
 AUC paths for 10 resamples (red dots show population AUC, grey lines show AUC for the 10 "competitions", blue line 
 shows one specific competition for easier understanding)
 
-![](path-100K-100mod.png)
+![](figs-100K-100mod/path-100K-100mod.png)
 
 Zooming into the top 20 models:
 
-![](pathzoom-100K-100mod.png)
+![](figs-100K-100mod/pathzoom-100K-100mod.png)
 
 "True ranks" (as measured on the larger "population" evaluation set) vs "competition ranks" (as measured
 on the "private LB" evaluation 
 
-![](rank-100K-100mod.png)
+![](figs-100K-100mod/rank-100K-100mod.png)
 
-![](rankhist-100K-100mod.png)
+![](figs-100K-100mod/rankhist-100K-100mod.png)
 
 It is clear that in this case the top 3 ranks remain pretty stable (the top 3 models
 rarely switch ranks as it can be seen on all the above plots). As we go down in the ranks, the rank
 stability decreases, e.g. the 90% confidence interval for the "competition rank" of the 10th model is
 [6,16], for the 30th model is [21,46]
 
-![](rankscatter-100K-100mod.png)
+![](figs-100K-100mod/rankscatter-100K-100mod.png)
 
 
 
@@ -92,11 +92,11 @@ stability decreases, e.g. the 90% confidence interval for the "competition rank"
 
 When the number of competitors increases, the top ranks become more unstable:
 
-![](rank-100K-1000mod.png)
+![](figs-100K-1000mod/rank-100K-1000mod.png)
 
-![](rankhist-100K-1000mod.png)
+![](figs-100K-1000mod/rankhist-100K-1000mod.png)
 
-![](rankhistcum-100K-1000mod.png)
+![](figs-100K-1000mod/rankhistcum-100K-1000mod.png)
 
 
 
@@ -104,19 +104,19 @@ When the number of competitors increases, the top ranks become more unstable:
 
 It is very common in Kaggle competitions to have ~3000 participants. In this case: 
 
-![](scatter-100K-3000mod.png)
+![](figs-100K-3000mod/scatter-100K-3000mod.png)
 
-![](path-100K-3000mod.png)
+![](figs-100K-3000mod/path-100K-3000mod.png)
 
-![](pathzoom-100K-3000mod.png)
+![](figs-100K-3000mod/pathzoom-100K-3000mod.png)
 
-![](rank-100K-3000mod.png)
+![](figs-100K-3000mod/rank-100K-3000mod.png)
 
-![](rankhist-100K-3000mod.png)
+![](figs-100K-3000mod/rankhist-100K-3000mod.png)
 
-![](rankhistcum-100K-3000mod.png)
+![](figs-100K-3000mod/rankhistcum-100K-3000mod.png)
 
-![](rankscatter-100K-3000mod.png)
+![](figs-100K-3000mod/rankscatter-100K-3000mod.png)
 
 
 
@@ -127,24 +127,24 @@ For smaller evaluation sets (sadly actually pretty common in Kaggle competitions
 
 #### Number of models `M=100`
 
-![](rank-10K-100mod.png)
+![](figs-10K-100mod/rank-10K-100mod.png)
 
-![](rankhist-10K-100mod.png)
+![](figs-10K-100mod/rankhist-10K-100mod.png)
 
-![](rankhistcum-10K-100mod.png)
+![](figs-10K-100mod/rankhistcum-10K-100mod.png)
 
 
 #### Number of models `M=3000`
 
-![](scatter-10K-3000mod.png)
+![](figs-10K-3000mod/scatter-10K-3000mod.png)
 
-![](pathzoom-10K-3000mod.png)
+![](figs-10K-3000mod/pathzoom-10K-3000mod.png)
 
-![](rank-10K-3000mod.png)
+![](figs-10K-3000mod/rank-10K-3000mod.png)
 
-![](rankhistcum-10K-3000mod.png)
+![](figs-10K-3000mod/rankhistcum-10K-3000mod.png)
 
-![](rankscatter-10K-3000mod.png)
+![](figs-10K-3000mod/rankscatter-10K-3000mod.png)
 
 Running such a competition is silly. The median "competition rank" for the actually best model is 12, that is there is
 50% chance that the best model will be 12th or worse in the competition. There is even a 10% chance that the best model will be ranked
