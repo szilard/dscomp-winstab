@@ -114,6 +114,8 @@ It is very common in Kaggle competitions to have ~3000 participants. In this cas
 
 ![](rankhist-100K-3000mod.png)
 
+![](rankhistcum-100K-3000mod.png)
+
 ![](rankscatter-100K-3000mod.png)
 
 
