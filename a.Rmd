@@ -1,0 +1,161 @@
+```{r}
+
+library(ggplot2)
+library(data.table)
+
+K <- 3000    # number of models/"competitors"
+KP <- 20    # top models (e.g. in plots)
+
+##load("run4-300K/simul-res.Rdata")
+##load("run3-100K/simul-res.Rdata")
+##load("run2-30K/simul-res.Rdata")
+load("run1-10K/simul-res.Rdata")
+if(K>k) stop("Not enough simulation iterations")
+
+auc_popul <- auc_popul[1:K]
+auc_test <- auc_test[1:K,]
+params_random <- params_random[1:K,]
+runtm_train <- runtm_train[1:K]
+ntrees <- ntrees[1:K]
+
+B <- ncol(auc_test)
+
+
+rnk <- order(auc_popul, decreasing = TRUE)
+
+auc_popul <- auc_popul[rnk]
+auc_test <- auc_test[rnk,]
+params_random <- as.data.table(params_random)[rnk]
+params_random[,rnk:=1:K]
+runtm_train <- runtm_train[rnk]
+ntrees <- ntrees[rnk]
+
+d_res <- merge(data.table(rnk=1:K, auc=auc_popul, runtm=runtm_train, ntrees=ntrees),params_random)
+head(d_res,15)
+
+
+ggplot(d_res) + geom_point(aes(x = runtm, y = auc, color=(rnk<=KP), xmin=0), alpha = 0.2) + 
+  scale_color_manual(values = c("blue","red")) 
+
+ggplot(d_res) + geom_point(aes(x = ntrees, y = auc, color=(rnk<=KP), xmin=0), alpha = 0.2) + 
+  scale_color_manual(values = c("blue","red")) 
+
+
+ggplot(d_res) + geom_density(aes(x = auc))
+summary(auc_popul)
+sd(auc_popul)
+
+## SD between models on each resample (B numbers)
+summary(apply(auc_test, 2,sd))
+
+## SD between resamples of each model (K numbers)
+summary(apply(auc_test, 1,sd))
+
+
+ggplot(d_res) + geom_density(aes(x = auc, color = as.factor(num_leaves), group = num_leaves))
+ggplot(d_res) + geom_density(aes(x = auc, color = as.factor(min_data_in_leaf), group = min_data_in_leaf))
+ggplot(d_res) + geom_density(aes(x = auc, color = as.factor(feature_fraction), group = feature_fraction))
+ggplot(d_res) + geom_density(aes(x = auc, color = as.factor(feature_fraction_bynode), group = feature_fraction_bynode))
+ggplot(d_res) + geom_density(aes(x = auc, color = as.factor(bagging_fraction), group = bagging_fraction))
+ggplot(d_res) + geom_density(aes(x = auc, color = as.factor(bagging_freq), group = bagging_freq))
+ggplot(d_res) + geom_density(aes(x = auc, color = as.factor(lambda_l1), group = lambda_l1))
+ggplot(d_res) + geom_density(aes(x = auc, color = as.factor(lambda_l2), group = lambda_l2))
+
+
+rnk_test <- matrix(0,nrow = K,ncol = B)
+for (b in 1:B) {
+  rnk_test[,b] <- rank(-auc_test[,b], ties.method = "min")
+}
+head(rnk_test)
+
+apply(rnk_test, 1, median)[1:KP]
+
+
+dp <- as.data.table(t(auc_test))
+dp[,b:=1:B]
+dp <- melt(dp, id.vars="b")
+dp[,model:=as.numeric(sub("V","",variable))]
+ggplot(dp[b<=10]) + geom_line(aes(x = model, y = value, group = b), alpha = 0.4) +
+  geom_point(data = data.frame(model = 1:K, value = auc_popul, b = 0), 
+            aes(x = model, y = value, group = b), size = 1.5, color = "red") +
+  geom_line(data = dp[b==1], aes(x = model, y = value)
+            , size = 1, color = "blue") + ylab("AUC")
+
+ggplot(dp) + geom_boxplot(aes(x = model, y = value, group=model))
+
+
+dp1 <- dp[b<=4]
+dp1[,auc_test:=value]
+alpha = ifelse(K>=3000,0.1,ifelse(K>=1000,0.2,ifelse(K>=300,0.3,0.5)))
+ggplot(merge(dp1, data.table(model=1:K, auc_popul))) + geom_point(aes(x = auc_popul, y= auc_test), alpha = alpha) + facet_wrap(~b, scales="free_y") +
+  xlab("true AUC") + ylab("competition AUC")
+
+
+cor(auc_popul,auc_test[,1],method="spearman")
+mean(sapply(1:B, function(b) cor(auc_popul[1:20],auc_test[1:20,b],method="spearman")))
+mean(sapply(1:B, function(b) cor(auc_popul[1:5],auc_test[1:5,b],method="spearman")))
+
+
+dp <- as.data.table(t(auc_test))[,1:KP]
+dp[,b:=1:B]
+dp <- melt(dp, id.vars="b")
+dp[,model:=as.numeric(sub("V","",variable))]
+ggplot(dp[b<=15]) + geom_line(aes(x = model, y = value, group = b), alpha = 0.4) +
+  geom_point(data = data.frame(model = 1:KP, value = auc_popul[1:KP], b = 0), 
+            aes(x = model, y = value, group = b), size = 2, color = "red") +
+  geom_line(data = dp[b==1], aes(x = model, y = value), size = 1.5, color = "blue") + ylab("AUC") +
+  scale_x_continuous(breaks = 1:KP, minor_breaks = 1:KP)
+
+ggplot(dp) + geom_boxplot(aes(x = model, y = value, group=model))
+
+
+ggplot(melt(as.data.table(t(rnk_test)))) + geom_boxplot(aes(x = variable, y = value))
+
+ggplot(melt(as.data.table(t(rnk_test)))) + geom_boxplot(aes(x = variable, y = value)) + 
+  scale_x_discrete(limits=paste0("V",1:KP))
+
+
+apply(rnk_test[c(1,2,3,10,30,100),], 1, function(x) quantile(x, probs = c(0.05,0.5,0.9, 0.95)))
+
+sum(rnk_test[1,]==1)/B
+
+
+
+dp <- as.data.table(t(rnk_test))
+dp[,b:=1:B]
+dp <- melt(dp, id.vars="b")
+dp[,model:=as.numeric(sub("V","",variable))]
+##ggplot(dp) + geom_jitter(aes(x = model, y = value), alpha = 0.12, size=0.7) + 
+##  xlab("true rank") + ylab("competition rank") + coord_equal()
+ggplot(dp) + geom_point(aes(x = model, y = value), alpha = 0.01, size=0.7) + 
+  xlab("true rank") + ylab("competition rank") + coord_equal()
+
+
+dh <- as.data.table(rnk_test)
+dh[,rnk_popul:=1:K]
+dh <- melt(dh, id.vars="rnk_popul")
+setnames(dh, "value", "rnk_test")
+dh <- dh[,.N,by=.(rnk_popul,rnk_test)]
+dh[,freq:=N/B*100]
+
+ggplot(dh[rnk_popul<=KP & rnk_test<=KP]) + geom_tile(aes(x = rnk_popul, y = rnk_test, fill = freq)) + coord_equal() +
+  scale_fill_gradientn(colours = c("#ffff99", "#ff3333","#ff44ff","#0000ff"), limits = c(0,100), breaks = c(0,25,50,100)) +
+scale_x_continuous(breaks = 1:KP, minor_breaks = 1:KP, limits = c(NA,KP+0.5)) + xlab("true rank") +
+  scale_y_continuous(breaks = 1:KP, minor_breaks = 1:KP, limits = c(NA,KP+0.5)) + ylab("competition rank") +
+  geom_point(data=data.frame(rnk=1:KP, median=apply(rnk_test, 1, median)[1:KP]), 
+             aes(x = rnk, y = median), size=1.8) 
+
+ggplot(dp[model %in% c(1,2,3)]) + geom_bar(mapping = aes(x = value, y = ..prop.., group = 1), stat = "count") + facet_wrap(~paste0("true rank = ",model), scales = "free", nrow = 2) +
+  ##scale_x_continuous(breaks = 1:100) +   
+  scale_x_continuous(breaks = c(1:5,7,seq(10,100,5))) + 
+  ##scale_x_log10(breaks=c(1,3,10,30,100,300)) +
+  xlab("competition rank") + ylab("distribution")
+
+ggplot(dp[model %in% c(1,2,3)]) + stat_ecdf(aes(x = value), ) + facet_wrap(~paste0("true rank = ",model), scales = "free", nrow = 2) +
+  ##scale_x_continuous(breaks = 1:100) +   
+  scale_x_continuous(breaks = c(1:5,7,seq(10,100,5))) + 
+  ##scale_x_log10(breaks=c(1,3,10,30,100,300)) +
+  xlab("competition rank") + ylab("cumulative distribution")
+
+```
+

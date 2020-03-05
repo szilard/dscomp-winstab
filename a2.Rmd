@@ -1,0 +1,36 @@
+```{r}
+
+library(ggplot2)
+library(data.table)
+
+d <- data.table(M=numeric(0), K=numeric(0), win_freq=numeric(0))
+for(size in c(10,30,100)) {
+  for (K in c(100,300,1000,3000)) {
+    load(paste0("simul-res--",size,"K.Rdata"))
+    if(K>k) next
+    
+    auc_popul <- auc_popul[1:K]
+    auc_test <- auc_test[1:K,]
+    B <- ncol(auc_test)
+    
+    rnk <- order(auc_popul, decreasing = TRUE)
+    auc_popul <- auc_popul[rnk]
+    auc_test <- auc_test[rnk,]
+
+    rnk_test <- matrix(0,nrow = K,ncol = B)
+    for (b in 1:B) {
+      rnk_test[,b] <- rank(-auc_test[,b], ties.method = "min")
+    }    
+
+    d <- rbind(d, data.table(M=paste0(size,"K"),K=K,win_freq=sum(rnk_test[1,]==1)/B))
+  }
+}
+d$M <- factor(d$M, levels = paste0(c(10,30,100,300),"K"))
+
+ggplot(d) + geom_tile(aes(x = as.factor(M), y = as.factor(K), fill = win_freq)) +
+  scale_fill_gradient(low="#ffff99", high="#ff3333", limits = c(0,1)) +
+  xlab("test set size") + ylab("number of models") +
+  geom_text(aes(x = as.factor(M), y = as.factor(K), label = win_freq))
+
+```
+
