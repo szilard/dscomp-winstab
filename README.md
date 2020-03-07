@@ -204,5 +204,19 @@ Zooming into the top 20 models:
 ![](figs-bs-100K-100mod/rankhist.png)
 
 
+#### Number of models `M=3000`
+
+RESULTS HERE:
+
+![](figs-bs-100K-3000mod/scatter.png)
+
+![](figs-bs-100K-3000mod/path.png)
+
+![](figs-bs-100K-3000mod/pathzoom.png)
+
+![](figs-bs-100K-3000mod/rank.png)
+
+![](figs-bs-100K-3000mod/rankhist.png)
+
 
 
