@@ -73,7 +73,7 @@ Zooming into the top 20 models:
 ![](figs-100K-100mod/pathzoom-100K-100mod.png)
 
 "True ranks" (as measured on the larger "population" evaluation set) vs "competition ranks" (as measured
-on the "private LB" evaluation 
+on the "private LB" evaluation): 
 
 ![](figs-100K-100mod/rank-100K-100mod.png)
 
@@ -156,5 +156,53 @@ Running such a competition is silly. The median "competition rank" for the actua
 The frequency the best model/competitor is winning as a function of test set size (N) and number of models/competitors (M):
 
 ![](figs-etc/best-winning.png)
+
+
+
+-----------------------
+
+## Bootstrapping
+
+In the real world a larger "population" set is not available, however competition organizers could still evaluate
+the stability/statistical significance of the top ranks using bootstrapping (from the "private 
+leaderboard" test set). I've been advancing this idea for many years in private communications, and more recently also 
+publicly (on twitter), only to find out later that this has been already done long time ago by Rich Caruana in
+evaluating the best models in KDD Cup 2004 (and maybe even earlier by others).
+
+The above simulation study can be changed slightly to implement this: 
+
+From the dataset of 10 million records, we get a training sample of 100,000, a validation set of 20,000 records and a 
+"private leaderboard" test dataset of size `N` (e.g. `N=100,000`).
+We train `M` (e.g. `M=3000`) GBM models (binary classification) with lightgbm by using random search over a grid of hyperparameter values
+and early stopping on the validation set.
+We measure the AUC of the models on the "private leaderboard" test dataset of size `N` ("competition AUC") and also on `B=100` boostrapping resamples
+(samples of size `N` with replacement) of this test set ("bootstrapped AUC"). 
+We calculate the "competition ranks" and "bootstrapped ranks" accordingly. 
+
+### "Private LB" test set size `N=100,000`
+
+#### Number of models ("competitors") `M=100`
+
+"Competition AUC" (as measured on the "private LB" test set) vs "bootstrapped AUC" (as measured
+on the bootstrapped resamples of it):
+
+![](figs-bs-100K-100mod/scatter.png)
+
+AUC paths for 10 resamples (magenta dots show "competition AUC", grey lines show AUC for 10 resamples, blue line 
+shows one specific resample for easier understanding)
+
+![](figs-bs-100K-100mod/path.png)
+
+Zooming into the top 20 models:
+
+![](figs-bs-100K-100mod/pathzoom.png)
+
+"Competition ranks" (as measured on the "private LB" test set) vs "bootstrapped ranks":
+
+![](figs-bs-100K-100mod/rank.png)
+
+![](figs-bs-100K-100mod/rankhist.png)
+
+
 
 
